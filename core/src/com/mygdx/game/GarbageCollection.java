@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -11,10 +12,11 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.entities.Player;
 import com.mygdx.genericClasses.resources.ResourceEnum;
 import com.mygdx.genericClasses.resources.ResourceManager;
 
-public class GarbageCollection extends ApplicationAdapter {
+public class GarbageCollection extends ApplicationAdapter implements InputProcessor {
 	private SpriteBatch batch;
 	private ResourceManager resourceManager;
 	private OrthographicCamera camera;
@@ -22,7 +24,7 @@ public class GarbageCollection extends ApplicationAdapter {
 	static final int WORLD_WIDTH = 100;
 	static final int WORLD_HEIGHT = 100;
 
-	private Sprite mapSprite;
+	private Player player;
 
 	private Texture backGround;
 	
@@ -32,7 +34,7 @@ public class GarbageCollection extends ApplicationAdapter {
 
 		batch = new SpriteBatch();
 
-		mapSprite = new Sprite(resourceManager.getTexture(ResourceEnum.BADLOGIC));
+		player = new Player(resourceManager);
 
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1280, 1240);
@@ -43,16 +45,19 @@ public class GarbageCollection extends ApplicationAdapter {
 	@Override
 	public void render () {
 
-
 		resourceManager.update();
-		generalUpdate();
-		camera.position.set(mapSprite.getX(), mapSprite.getY(), 0);
+
+		camera.position.set(player.getX(), player.getY(), 0);
 		camera.update();
 
 		batch.setProjectionMatrix(camera.combined);
+
 		batch.begin();
+
 		batch.draw(backGround, 0, 0);
-		mapSprite.draw(batch);
+
+		player.draw(batch);
+
 		batch.end();
 	}
 	
@@ -62,25 +67,48 @@ public class GarbageCollection extends ApplicationAdapter {
 		resourceManager.dispose();
 	}
 
-	public void generalUpdate(){
-		if(Gdx.input.isKeyPressed(Input.Keys.D) || (Gdx.input.isKeyPressed(Input.Keys.LEFT)))
-		{
-			mapSprite.setX(mapSprite.getX()+5);
-		}
+	@Override
+	public boolean keyDown(int keycode) {
+		return false;
+	}
 
-		if(Gdx.input.isKeyPressed(Input.Keys.A) || (Gdx.input.isKeyPressed(Input.Keys.RIGHT)))
-		{
-			mapSprite.setX(mapSprite.getX()-5);
-		}
+	@Override
+	public boolean keyUp(int keycode) {
+		return false;
+	}
 
-		if(Gdx.input.isKeyPressed(Input.Keys.S) || (Gdx.input.isKeyPressed(Input.Keys.DOWN)))
-		{
-			mapSprite.setY(mapSprite.getY()-5);
-		}
+	@Override
+	public boolean keyTyped(char character) {
+		return false;
+	}
 
-		if(Gdx.input.isKeyPressed(Input.Keys.W) || (Gdx.input.isKeyPressed(Input.Keys.UP)))
-		{
-			mapSprite.setY(mapSprite.getY()+5);
-		}
+	@Override
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		return false;
+	}
+
+	@Override
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		return false;
+	}
+
+	@Override
+	public boolean touchCancelled(int screenX, int screenY, int pointer, int button) {
+		return false;
+	}
+
+	@Override
+	public boolean touchDragged(int screenX, int screenY, int pointer) {
+		return false;
+	}
+
+	@Override
+	public boolean mouseMoved(int screenX, int screenY) {
+		return false;
+	}
+
+	@Override
+	public boolean scrolled(float amountX, float amountY) {
+		return false;
 	}
 }
