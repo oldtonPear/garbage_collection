@@ -18,7 +18,7 @@ import com.mygdx.genericClasses.resources.ResourceManager;
 
 public class GarbageCollection extends ApplicationAdapter implements InputProcessor {
 	private SpriteBatch batch;
-	private ResourceManager resourceManager;
+	public static ResourceManager resourceManager;
 	private OrthographicCamera camera;
 
 	static final int WORLD_WIDTH = 100;
@@ -34,7 +34,7 @@ public class GarbageCollection extends ApplicationAdapter implements InputProces
 
 		batch = new SpriteBatch();
 
-		player = new Player(resourceManager);
+		player = new Player();
 
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1280, 1240);

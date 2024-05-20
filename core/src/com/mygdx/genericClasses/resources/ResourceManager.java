@@ -26,6 +26,7 @@ public class ResourceManager {
 
     private void loadPathMap(){
         pathMap.put(ResourceEnum.BADLOGIC, "badlogic.jpg");
+
     }
 
     public Texture getTexture(ResourceEnum e){

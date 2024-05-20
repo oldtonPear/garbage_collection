@@ -3,16 +3,15 @@ package com.mygdx.entities;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.mygdx.game.GarbageCollection;
 import com.mygdx.genericClasses.resources.ResourceEnum;
-import com.mygdx.genericClasses.resources.ResourceManager;
 import com.mygdx.interfaces.Drawable;
 
 public class Player extends Actor implements Drawable {
 
     private Sprite sprite;
-    public Player(ResourceManager manager){
-        sprite = new Sprite(manager.getTexture(ResourceEnum.BADLOGIC));
-
+    public Player(){
+        sprite = new Sprite(GarbageCollection.resourceManager.getTexture(ResourceEnum.BADLOGIC));
     }
 
     public void setX(float x) {
