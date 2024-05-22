@@ -20,7 +20,7 @@ public class GarbageCollection extends ApplicationAdapter {
 		backGround = Utils.getTexture(ResourceEnum.BACKGROUND);
 
 		Player player = new Player(640/2, 480/2);
-		player.setMovementStyle(Player.Styles.REALTIME);
+		player.setMovementStyle(Player.Styles.TILED);
 		stage.addActor(player);
 		stage.setKeyboardFocus(player);
 	}
