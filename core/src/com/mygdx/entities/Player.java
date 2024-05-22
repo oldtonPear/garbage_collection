@@ -46,14 +46,7 @@ public class Player extends Actor {
     @Override
     public void act(float delta) {
         super.act(delta);
-        Vector2 movement = movementStyle.move();
-
-        if(movementStyle instanceof TiledMovementStyle){
-            MoveByAction mba = new MoveByAction();
-            mba.setAmount(movement.x, movement.y);
-            mba.setDuration(0.1f);
-            this.addAction(mba);
-        }
+        movementStyle.move();
     }
 
     @Override
