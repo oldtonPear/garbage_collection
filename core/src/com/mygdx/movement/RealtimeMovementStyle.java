@@ -12,7 +12,7 @@ public class RealtimeMovementStyle extends MovementStyle{
         this.player = player;
     }
 
-    public Vector2 move() {
+    public void move() {
         Vector2 finalPosition = new Vector2(0, 0);
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             finalPosition.x += 2;
@@ -26,8 +26,7 @@ public class RealtimeMovementStyle extends MovementStyle{
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             finalPosition.y -= 2;
         }
-        /*player.setX(player.getX() + finalPosition.x);
-        player.setY(player.getY() + finalPosition.y);*/
-        return finalPosition;
+        player.setX(player.getX() + finalPosition.x);
+        player.setY(player.getY() + finalPosition.y);
     }
 }

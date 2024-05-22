@@ -1,7 +1,5 @@
 package com.mygdx.entities;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
@@ -13,8 +11,6 @@ import com.mygdx.genericClasses.Utils;
 import com.mygdx.movement.MovementStyle;
 import com.mygdx.movement.RealtimeMovementStyle;
 import com.mygdx.movement.TiledMovementStyle;
-
-import static com.mygdx.entities.Player.Styles.TILED;
 
 public class Player extends Actor {
 
@@ -48,17 +44,7 @@ public class Player extends Actor {
     @Override
     public void act(float delta) {
         super.act(delta);
-        Vector2 movement = movementStyle.move();
-        if(movementStyle instanceof RealtimeMovementStyle){
-            setX(getX() + movement.x);
-            setY(getY() + movement.y);
-        }
-        else{
-            MoveByAction mba = new MoveByAction();
-            mba.setAmount(movement.x, movement.y);
-            mba.setDuration(0.1f);
-            this.addAction(mba);
-        }
+        movementStyle.move();
     }
 
     @Override
