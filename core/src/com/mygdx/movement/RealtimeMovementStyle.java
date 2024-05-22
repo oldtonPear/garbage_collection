@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class RealtimeMovementStyle extends MovementStyle{
-    private Actor player;
+    private final Actor player;
 
     public RealtimeMovementStyle(Actor player){
         this.player = player;
@@ -26,8 +26,10 @@ public class RealtimeMovementStyle extends MovementStyle{
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             finalPosition.y -= 2;
         }
-        /*player.setX(player.getX() + finalPosition.x);
-        player.setY(player.getY() + finalPosition.y);*/
+        player.setX(player.getX() + finalPosition.x);
+        player.setY(player.getY() + finalPosition.y);
+
+        player.getStage().getCamera().translate(finalPosition.x, finalPosition.y, 0);
         return finalPosition;
     }
 }

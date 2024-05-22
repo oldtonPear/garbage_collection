@@ -1,7 +1,8 @@
-package com.mygdx.genericClasses;
+package com.mygdx.genericClasses.resources;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.genericClasses.resources.ResourceEnum;
 
 import java.util.EnumMap;
 
@@ -25,7 +26,8 @@ public class ResourceManager {
     }
 
     private void loadPathMap(){
-        pathMap.put(ResourceEnum.BADLOGIC, "badlogic.jpg");
+        pathMap.put(ResourceEnum.PLAYER, "player.png");
+        pathMap.put(ResourceEnum.BACKGROUND, "sc_map.png");
 
     }
 
