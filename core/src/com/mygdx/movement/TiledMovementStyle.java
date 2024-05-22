@@ -2,8 +2,8 @@ package com.mygdx.movement;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 
 public class TiledMovementStyle extends MovementStyle{
 
@@ -11,27 +11,34 @@ public class TiledMovementStyle extends MovementStyle{
     private Actor player;
 
     public TiledMovementStyle(Actor player){
-        lastMove = System.currentTimeMillis();
+        lastMove = 0;
         this.player = player;
     }
 
-    public Vector2 move() {
-        System.out.println((System.currentTimeMillis() - lastMove));
-        if((System.currentTimeMillis() - lastMove) < 50) return new Vector2(0,0);
-        lastMove = System.currentTimeMillis();
-        Vector2 finalPosition = new Vector2(0, 0);
+    public void move() {
+        if((System.currentTimeMillis() - lastMove) < 150) return;
+        float x = 0, y = 0;
+        boolean moved = false;
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            finalPosition.x += 50;
+            moved = true;
+            x += 50;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            finalPosition.x -= 50;
+            moved = true;
+            x -= 50;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            finalPosition.y += 50;
+            moved = true;
+            y += 50;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            finalPosition.y -= 50;
+            moved = true;
+            y -= 50;
         }
-        return finalPosition;
+        if (moved) lastMove = System.currentTimeMillis();
+        MoveByAction mba = new MoveByAction();
+        mba.setAmount(x, y);
+        mba.setDuration(0.1f);
+        player.addAction(mba);
     }
 }
