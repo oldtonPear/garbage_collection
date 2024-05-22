@@ -16,9 +16,10 @@ public class TiledMovementStyle extends MovementStyle{
     }
 
     public void move() {
-        if((System.currentTimeMillis() - lastMove) < 150) return;
+        if((Gdx.graphics.getFrameId() - lastMove) < 150) return;
         float x = 0, y = 0;
         boolean moved = false;
+
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             moved = true;
             x += 50;
@@ -35,7 +36,7 @@ public class TiledMovementStyle extends MovementStyle{
             moved = true;
             y -= 50;
         }
-        if (moved) lastMove = System.currentTimeMillis();
+        if (moved) lastMove = Gdx.graphics.getFrameId();
         MoveByAction mba = new MoveByAction();
         mba.setAmount(x, y);
         mba.setDuration(0.1f);
