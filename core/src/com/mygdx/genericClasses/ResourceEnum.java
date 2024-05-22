@@ -1,4 +1,4 @@
-package com.mygdx.genericClasses.resources;
+package com.mygdx.genericClasses;
 
 public enum ResourceEnum {
     BADLOGIC,

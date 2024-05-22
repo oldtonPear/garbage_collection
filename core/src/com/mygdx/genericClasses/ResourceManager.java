@@ -1,4 +1,4 @@
-package com.mygdx.genericClasses.resources;
+package com.mygdx.genericClasses;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
