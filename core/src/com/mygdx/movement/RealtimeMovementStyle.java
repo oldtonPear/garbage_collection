@@ -26,9 +26,14 @@ public class RealtimeMovementStyle extends MovementStyle{
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             finalPosition.y -= 2;
         }
-        player.setX(player.getX() + finalPosition.x);
-        player.setY(player.getY() + finalPosition.y);
-
-        player.getStage().getCamera().translate(finalPosition.x, finalPosition.y, 0);
+        System.out.println(player.getX() + finalPosition.x);
+        if(player.getX() + finalPosition.x < 640 && player.getX() + finalPosition.x > 0){
+            player.setX(player.getX() + finalPosition.x);
+            player.getStage().getCamera().translate(finalPosition.x, 0, 0);
+        }
+        if(player.getY() + finalPosition.y < 480 && player.getY() + finalPosition.y > 0){
+            player.setY(player.getY() + finalPosition.y);
+            player.getStage().getCamera().translate(0, finalPosition.y, 0);
+        }
     }
 }
