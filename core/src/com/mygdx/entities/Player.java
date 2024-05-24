@@ -47,8 +47,8 @@ public class Player extends Actor {
     public void act(float delta) {
         super.act(delta);
     
-        playerAnimationManager.updateAnimation(delta);
         playerAnimationManager.setCurrentAnimation(movementStyle.move());
+        playerAnimationManager.updateAnimation(delta);
     }
 
     @Override

@@ -28,7 +28,7 @@ public class MainScreen extends ScreenAdapter {
         backGround = Utils.getTexture(ResourceEnum.BACKGROUND);
 
         Player player = new Player(640/2, 480/2);
-        player.setMovementStyle(Player.Styles.TILED);
+        player.setMovementStyle(Player.Styles.REALTIME);
         stage.addActor(player);
         stage.setKeyboardFocus(player);
     }
