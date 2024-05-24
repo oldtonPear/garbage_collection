@@ -5,41 +5,71 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 
-public class TiledMovementStyle extends MovementStyle{
+import java.util.HashSet;
+import java.util.Set;
 
-    private long lastMove;
-    private Actor player;
+public class TiledMovementStyle extends MovementStyle {
 
-    public TiledMovementStyle(Actor player){
+    private final Set<Character> inputs;
+    private boolean inputted = false;
+    private long lastMove, firstInput;
+    private final Actor player;
+
+    public TiledMovementStyle(Actor player) {
+        inputs = new HashSet<>();
         lastMove = 0;
+        firstInput = 0;
         this.player = player;
     }
 
     public int move() {
-        if((System.currentTimeMillis() - lastMove) < 150) return 0;
-        float x = 0, y = 0;
-        boolean moved = false;
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            moved = true;
-            x += 50;
+        long sinceLastMove = (Gdx.graphics.getFrameId() - lastMove);
+
+        if (sinceLastMove < 4) return -1;
+
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) inputs.add('W');
+        if (Gdx.input.isKeyPressed(Input.Keys.S)) inputs.add('S');
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) inputs.add('A');
+        if (Gdx.input.isKeyPressed(Input.Keys.D)) inputs.add('D');
+
+        if (sinceLastMove < 9) return -1;
+
+        if (inputs.isEmpty()) return -1;
+
+        if (!inputted) {
+            inputted = true;
+            firstInput = Gdx.graphics.getFrameId();
+            return -1;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            moved = true;
-            x -= 50;
+
+        long sinceFirstInput = (Gdx.graphics.getFrameId() - firstInput);
+
+        if (sinceFirstInput > 1) {
+            float x = 0, y = 0;
+
+            for (Character c : inputs) {
+                switch (c) {
+                    case 'W' -> y += 50;
+                    case 'A' -> x -= 50;
+                    case 'S' -> y -= 50;
+                    case 'D' -> x += 50;
+                }
+            }
+
+            inputs.clear();
+            inputted = false;
+            lastMove = Gdx.graphics.getFrameId();
+            MoveByAction mba = new MoveByAction();
+            mba.setAmount(x, y);
+            mba.setDuration(0.1f);
+            player.addAction(mba);
+            int dir = -1;
+            if (y == 50) dir = 1;
+            else if (y == -50) dir = 0;
+            if (x == 50) dir = 3;
+            else if (x == -50) dir = 2;
+            return dir;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            moved = true;
-            y += 50;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            moved = true;
-            y -= 50;
-        }
-        if (moved) lastMove = System.currentTimeMillis();
-        MoveByAction mba = new MoveByAction();
-        mba.setAmount(x, y);
-        mba.setDuration(0.1f);
-        player.addAction(mba);
-        return 0;
+        return -1;
     }
 }
