@@ -25,7 +25,7 @@ public class TiledMovementStyle extends MovementStyle {
     public int move() {
         long sinceLastMove = (Gdx.graphics.getFrameId() - lastMove);
 
-        if (sinceLastMove < 4) return -1;
+        if (sinceLastMove < 5) return -1;
 
         if (Gdx.input.isKeyPressed(Input.Keys.W)) inputs.add('W');
         if (Gdx.input.isKeyPressed(Input.Keys.S)) inputs.add('S');
