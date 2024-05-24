@@ -9,8 +9,6 @@ import com.mygdx.genericClasses.resources.ResourceEnum;
 
 public class PlayerAnimationManager {
 
-    private final int FRAME_COLS = 4, FRAME_ROWS = 3;
-
     Animation<TextureRegion> walkDownAnimation;
     Animation<TextureRegion> walkUpAnimation;
     Animation<TextureRegion> walkLeftAnimation;
@@ -26,35 +24,26 @@ public class PlayerAnimationManager {
     public PlayerAnimationManager(Player p){
         walkSheet = Utils.getTexture(ResourceEnum.PLAYER);
 
+        int FRAME_COLS = 4;
+        int FRAME_ROWS = 3;
+
         TextureRegion[][] tmp = TextureRegion.split(walkSheet,
 				walkSheet.getWidth() / FRAME_COLS,
 				walkSheet.getHeight() / FRAME_ROWS);
 
-        int index;
-
         TextureRegion[] walkDownFrames = new TextureRegion[FRAME_ROWS];
-		index = 0;
-		for (int i = 0; i < FRAME_ROWS; i++) {
-			walkDownFrames[index++] = tmp[i][0];
-		}
-
         TextureRegion[] walkUpFrames = new TextureRegion[FRAME_ROWS];
-		index = 0;
-		for (int i = 0; i < FRAME_ROWS; i++) {
-			walkUpFrames[index++] = tmp[i][1];
-		}
-
         TextureRegion[] walkLeftFrames = new TextureRegion[FRAME_ROWS];
-		index = 0;
-		for (int i = 0; i < FRAME_ROWS; i++) {
-			walkLeftFrames[index++] = tmp[i][2];
-		}
+        TextureRegion[] walkRightFrames = new TextureRegion[FRAME_ROWS];
 
-        TextureRegion[] walkRightFrames = new TextureRegion[1 * FRAME_ROWS];
-		index = 0;
 		for (int i = 0; i < FRAME_ROWS; i++) {
-            walkRightFrames[index++] = tmp[i][3];
-		}
+			walkDownFrames[i] = tmp[i][0];
+            walkUpFrames[i] = tmp[i][1];
+            walkLeftFrames[i] = tmp[i][2];
+            walkRightFrames[i] = tmp[i][3];
+
+        }
+
 
         walkDownAnimation = new Animation<TextureRegion>(0.2f, walkDownFrames);
         walkUpAnimation = new Animation<TextureRegion>(0.2f, walkUpFrames);
@@ -70,14 +59,10 @@ public class PlayerAnimationManager {
         return currentFrame;
     }
 
-    public void setCurrentFrame(float stateTime) {
-        currentFrame = walkDownAnimation.getKeyFrame(stateTime, true);
-    }
-
     /**
      * 
-     * @param delta
-     * @param direction 0:down, 1:up, 2:left, 3:right
+     * @param delta <br>
+     * direction 0:down, 1:up, 2:left, 3:right
      */
     public void updateAnimation(float delta){
         stateTime += delta;
@@ -86,10 +71,10 @@ public class PlayerAnimationManager {
 
     public void setCurrentAnimation(int direction){
         switch (direction) {
-            case 0 -> {currentAnimation = walkDownAnimation;}
-            case 1 -> {currentAnimation = walkUpAnimation;}
-            case 2 -> {currentAnimation = walkLeftAnimation;}
-            case 3 -> {currentAnimation = walkRightAnimation;}
+            case 0 -> currentAnimation = walkDownAnimation;
+            case 1 -> currentAnimation = walkUpAnimation;
+            case 2 -> currentAnimation = walkLeftAnimation;
+            case 3 -> currentAnimation = walkRightAnimation;
         }
     }
 }
