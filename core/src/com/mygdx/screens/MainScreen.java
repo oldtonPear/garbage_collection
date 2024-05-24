@@ -1,7 +1,6 @@
 package com.mygdx.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -29,7 +28,7 @@ public class MainScreen extends ScreenAdapter {
         backGround = Utils.getTexture(ResourceEnum.BACKGROUND);
 
         Player player = new Player(640/2, 480/2);
-        player.setMovementStyle(Player.Styles.REALTIME);
+        player.setMovementStyle(Player.Styles.TILED);
         stage.addActor(player);
         stage.setKeyboardFocus(player);
     }
