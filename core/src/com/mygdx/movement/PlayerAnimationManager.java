@@ -32,19 +32,19 @@ public class PlayerAnimationManager {
 
         int index;
 
-        TextureRegion[] walkDownFrames = new TextureRegion[1 * FRAME_ROWS];
+        TextureRegion[] walkDownFrames = new TextureRegion[FRAME_ROWS];
 		index = 0;
 		for (int i = 0; i < FRAME_ROWS; i++) {
 			walkDownFrames[index++] = tmp[i][0];
 		}
 
-        TextureRegion[] walkUpFrames = new TextureRegion[1 * FRAME_ROWS];
+        TextureRegion[] walkUpFrames = new TextureRegion[FRAME_ROWS];
 		index = 0;
 		for (int i = 0; i < FRAME_ROWS; i++) {
 			walkUpFrames[index++] = tmp[i][1];
 		}
 
-        TextureRegion[] walkLeftFrames = new TextureRegion[1 * FRAME_ROWS];
+        TextureRegion[] walkLeftFrames = new TextureRegion[FRAME_ROWS];
 		index = 0;
 		for (int i = 0; i < FRAME_ROWS; i++) {
 			walkLeftFrames[index++] = tmp[i][2];

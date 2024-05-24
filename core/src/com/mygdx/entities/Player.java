@@ -21,7 +21,7 @@ public class Player extends Actor {
         setY(y);
 
         playerAnimationManager = new PlayerAnimationManager(this);
-
+        setWidth(32);
         setBounds(getX(), getY(), getWidth(), getHeight());
         setTouchable(Touchable.enabled);
     }
