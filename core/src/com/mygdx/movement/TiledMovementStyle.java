@@ -22,30 +22,31 @@ public class TiledMovementStyle extends MovementStyle {
         this.player = player;
     }
 
-    public void move() {
+    public int move() {
         long sinceLastMove = (Gdx.graphics.getFrameId() - lastMove);
 
-        if (sinceLastMove < 4) return;
+        if (sinceLastMove < 4) return -1;
 
         if (Gdx.input.isKeyPressed(Input.Keys.W)) inputs.add('W');
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) inputs.add('A');
         if (Gdx.input.isKeyPressed(Input.Keys.S)) inputs.add('S');
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) inputs.add('A');
         if (Gdx.input.isKeyPressed(Input.Keys.D)) inputs.add('D');
 
-        if (sinceLastMove < 9) return;
+        if (sinceLastMove < 9) return -1;
 
-        if (inputs.isEmpty()) return;
-
-        float x = 0, y = 0;
+        if (inputs.isEmpty()) return -1;
 
         if (!inputted) {
             inputted = true;
             firstInput = Gdx.graphics.getFrameId();
-            return;
+            return -1;
         }
 
         long sinceFirstInput = (Gdx.graphics.getFrameId() - firstInput);
+
         if (sinceFirstInput > 1) {
+            float x = 0, y = 0;
+
             for (Character c : inputs) {
                 switch (c) {
                     case 'W' -> y += 50;
@@ -62,6 +63,13 @@ public class TiledMovementStyle extends MovementStyle {
             mba.setAmount(x, y);
             mba.setDuration(0.1f);
             player.addAction(mba);
+            int dir = -1;
+            if (y == 50) dir = 1;
+            else if (y == -50) dir = 0;
+            if (x == 50) dir = 3;
+            else if (x == -50) dir = 2;
+            return dir;
         }
+        return -1;
     }
 }

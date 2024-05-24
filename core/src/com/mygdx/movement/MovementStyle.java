@@ -5,5 +5,5 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public abstract class MovementStyle {
 
-    public abstract void move();
+    public abstract int move();
 }
