@@ -8,25 +8,33 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class RealtimeMovementStyle extends MovementStyle{
     private final Actor player;
 
-    public RealtimeMovementStyle(Actor player){
+    public RealtimeMovementStyle(Actor player, PlayerAnimationManager playerAnimationManager){
         this.player = player;
     }
 
-    public void move() {
+    public int move() {
+        int direction = -1;
         Vector2 finalPosition = new Vector2(0, 0);
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             finalPosition.x += 2;
+            if(!Gdx.input.isKeyPressed(Input.Keys.W) && !Gdx.input.isKeyPressed(Input.Keys.S)){
+                direction = 3;
+            }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             finalPosition.x -= 2;
+            if(!Gdx.input.isKeyPressed(Input.Keys.W) && !Gdx.input.isKeyPressed(Input.Keys.S)){
+                direction = 2;
+            }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+            direction = 1;
             finalPosition.y += 2;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             finalPosition.y -= 2;
+            direction = 0;
         }
-        System.out.println(player.getX() + finalPosition.x);
         if(player.getX() + finalPosition.x < 640 && player.getX() + finalPosition.x > 0){
             player.setX(player.getX() + finalPosition.x);
             player.getStage().getCamera().translate(finalPosition.x, 0, 0);
@@ -35,5 +43,6 @@ public class RealtimeMovementStyle extends MovementStyle{
             player.setY(player.getY() + finalPosition.y);
             player.getStage().getCamera().translate(0, finalPosition.y, 0);
         }
+        return direction;
     }
 }

@@ -26,7 +26,7 @@ public class ResourceManager {
     }
 
     private void loadPathMap(){
-        pathMap.put(ResourceEnum.PLAYER, "player.png");
+        pathMap.put(ResourceEnum.PLAYER, "animation_sheet.png");
         pathMap.put(ResourceEnum.BACKGROUND, "sc_map.png");
 
     }
