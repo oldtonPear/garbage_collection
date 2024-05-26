@@ -7,7 +7,7 @@ import java.util.EnumMap;
 
 public class ResourceManager {
 
-    public final AssetManager manager;
+    private final AssetManager manager;
 
     private final EnumMap<ResourceEnum, String> pathMap;
 
@@ -33,10 +33,6 @@ public class ResourceManager {
     public Texture getTexture(ResourceEnum e){
         manager.finishLoadingAsset(pathMap.get(e));
         return manager.get(pathMap.get(e));
-    }
-
-    public void update(){
-        manager.update();
     }
 
     public void dispose(){

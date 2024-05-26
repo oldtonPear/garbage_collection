@@ -12,5 +12,7 @@ public class Utils {
         return manager.getTexture(e);
     }
 
-
+    public static void dispose(){
+        manager.dispose();
+    }
 }

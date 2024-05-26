@@ -8,12 +8,10 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
 public class TileSetManager {
-    TiledMap tiledMap;
-    TiledMapRenderer tiledMapRenderer;
+    private final TiledMapRenderer tiledMapRenderer;
 
     public TileSetManager(){
-        tiledMap = new TmxMapLoader().load("tiles.tmx");
-        tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
+        tiledMapRenderer = new OrthogonalTiledMapRenderer(new TmxMapLoader().load("tiles.tmx"));
     }
 
     public void render(OrthographicCamera camera){

@@ -15,10 +15,9 @@ import com.mygdx.genericClasses.resources.ResourceEnum;
 
 public class MainScreen extends ScreenAdapter {
 
-    GarbageCollection game;
-    Stage stage;
-    Texture backGround;
-    TileSetManager tileSetManager;
+    private GarbageCollection game;
+    private Stage stage;
+    private TileSetManager tileSetManager;
 
     public MainScreen(GarbageCollection game){
         this.game = game;
@@ -31,7 +30,6 @@ public class MainScreen extends ScreenAdapter {
         stage.getCamera().translate(160,160,0);
 
         Gdx.input.setInputProcessor(stage);
-        backGround = Utils.getTexture(ResourceEnum.BACKGROUND);
 
         tileSetManager = new TileSetManager();
 
@@ -46,9 +44,6 @@ public class MainScreen extends ScreenAdapter {
         Gdx.gl.glClearColor(1,1,1,0);
         ScreenUtils.clear(1,1,1,0);
         tileSetManager.render((OrthographicCamera) stage.getCamera());
-        //stage.getBatch().begin();
-        //stage.getBatch().draw(backGround, 0, 0, 640, 480);
-        //stage.getBatch().end();
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
